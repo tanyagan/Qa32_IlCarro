@@ -12,7 +12,7 @@ public class HelperUser extends HelperBase {
     }
 
     public void openLoginForm() {
-        click(By.xpath("//*[text()=' Log in ']"));
+        click(By.xpath("//a[text()=' Log in ']"));
     }
 
     public void fillLoginForm(String email, String password) {
@@ -27,7 +27,7 @@ public class HelperUser extends HelperBase {
 
     public String checkMessage() {
         new WebDriverWait(wd, 5)
-                .until(ExpectedConditions.visibilityOf(wd.findElement(By.cssSelector(".dialog-container h2"))));
+                .until(ExpectedConditions.visibilityOf(wd.findElement(By.cssSelector(".dialog-container"))));
 
         String message = wd.findElement(By.cssSelector(".dialog-container h2")).getText();
         System.out.println(message);
@@ -75,17 +75,18 @@ public class HelperUser extends HelperBase {
 
     public void checkPolicyXy() {
         WebElement label = wd.findElement(By.cssSelector("label[for='terms-of-use']"));
+
         Rectangle rect = label.getRect();
         int offSetX = rect.getWidth() / 2;
         int offSetY = rect.getHeight() / 2;
 
         Actions actions = new Actions(wd);
         actions.moveToElement(label).release().perform();
-        actions.moveByOffset(-offSetX, -offSetY).click().release().perform();
+        actions.moveByOffset(-offSetX, -offSetY).click().release(). build().perform();
 
     }
 
-    public void checkPolicyJS() {
+    public void  checkPolicyJS() {
         JavascriptExecutor js = (JavascriptExecutor) wd;
         js.executeScript("document.querySelect('#terms-of-use').click();");
         js.executeScript("document.querySelect('#terms-of-use').checked=true;");
@@ -94,7 +95,7 @@ public class HelperUser extends HelperBase {
     public boolean isErrorPasswordDisplayedSize() {
         //Password must contain minimum 8 symbols   div.error div:first-child
         //Password must contain 1 uppercase letter, 1 lowercase letter and one number   div.error div:last-child
-        Boolean firstChild = new WebDriverWait(wd, 5)
+        Boolean firstChild = new WebDriverWait(wd, 10)
                 .until(ExpectedConditions
                         .textToBePresentInElement(wd.findElement(By.cssSelector("div.error div:first-child")),
                                 "Password must contain minimum 8 symbols"));
@@ -110,11 +111,19 @@ public class HelperUser extends HelperBase {
 
     }
 
-    public boolean isYallaButtonNoActive() {
-        return wd.findElement(By.cssSelector("button[type='submit']")).isEnabled();
+    public boolean isYallaButtonNotActive() {
+        return wd.findElement(By.cssSelector("[type='submit']")).isEnabled();
     }
 
     public boolean isYallaButtonNotClickable() {
         return isElementPresent(By.cssSelector("button[disabled]"));
+    }
+
+    public void login(User user) {
+        openLoginForm();
+        fillLoginForm(user);
+        submit();
+        submitOkButton();
+
     }
 }
