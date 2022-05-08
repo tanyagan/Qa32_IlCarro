@@ -30,7 +30,7 @@ public class HelperSearch extends HelperBase {
         //"4/10/2022" , "4/20/2022"
         click(By.id("dates"));
         //"4/10/2022"
-        String[] from = dataFrom.split("/");   //[4][10][2022]
+        String [] from = dataFrom.split("/");   //[4][10][2022]
         String dayF = from[1];
 
         String locatorFrom = String.format("//div[text()=' %s ']", dayF);
@@ -57,8 +57,8 @@ public class HelperSearch extends HelperBase {
 
     private void typePeriodInPast(String dataFrom, String dataTo) {
        //wd.findElement(By.id("dates")).sendKeys(dataFrom + " - "+dataTo);
-        type(By.id("dates"), dataFrom+" - "+dataTo);
-        click(By.cssSelector(".cdk-overlay-container"));
+        //type(By.id("dates"), dataFrom+" - "+dataTo);
+       // click(By.cssSelector(".cdk-overlay-container"));
         WebElement el = wd.findElement(By.id("dates"));
 
    //os?
@@ -88,7 +88,7 @@ public class HelperSearch extends HelperBase {
     public void searchAnyPeriod(String city, String dataFrom, String dataTo) {
         typeCity(city);
         selectPeriodAnyData(dataFrom, dataTo);
-        selectPeriodAnyData2(dataFrom, dataTo);
+        //selectPeriodAnyData2(dataFrom, dataTo);
 
     }
 
@@ -104,21 +104,21 @@ public class HelperSearch extends HelperBase {
         int diffYear;
         int diffMonth;
 
-        diffYear = from.getYear() - now.getYear();
-        if (diffYear == 0) {
-            diffMonth = from.getMonthValue() - now.getMonthValue();
+        diffYear = from.getYear()- now.getYear();
+        if (diffYear==0) {
+            diffMonth = from.getMonthValue()-now.getMonthValue();
         } else {
-            diffMonth = 12 - now.getMonthValue() + from.getMonthValue();
+            diffMonth = 12- now.getMonthValue() +from.getMonthValue();
         }
         clickByNextMonth(diffMonth);
 
-        String locator = String.format("//div[text()=' %s ']", from.getDayOfMonth());
+        String locator = String.format("//div[text()=' %s ']",from.getDayOfMonth());
         click(By.xpath(locator));
 
 
         //***************************************************************
         diffYear = to.getYear() -from.getYear();
-        if (diffYear == 0) {
+        if (diffYear==0) {
             diffMonth = to.getMonthValue() -from.getMonthValue();
         } else {
             diffMonth = 12-from.getMonthValue() +to.getMonthValue();
@@ -136,7 +136,7 @@ public class HelperSearch extends HelperBase {
 
         click(By.id("dates"));
 
-        int diffMonth = from.getYear() - now.getYear()
+        int diffMonth = from.getYear()- now.getYear()
                 ==0 ? from.getMonthValue()- now.getMonthValue() :12- now.getMonthValue() + from.getMonthValue();
 
 
@@ -151,7 +151,7 @@ public class HelperSearch extends HelperBase {
                 ==0 ? to.getMonthValue()- from.getMonthValue() :12- from.getMonthValue()+ to.getMonthValue();
 
         clickByNextMonth(diffMonth);
-        locator = String.format("//div[text()=' %s']", to.getDayOfMonth());
+        locator = String.format("//div[text()=' %s ']",to.getDayOfMonth());
         click(By.xpath(locator));
     }
 
@@ -176,7 +176,8 @@ public class HelperSearch extends HelperBase {
         click(By.cssSelector(".header a[href='/']"));
     }
     public boolean isListOfCarsAppeared() {
-    return isElementPresent(By.cssSelector(".cars-container"));}
+    return isElementPresent(By.cssSelector(".cars-container"));
+    }
 
 }
 

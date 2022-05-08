@@ -9,13 +9,13 @@ public class SearchTests extends TestBase{
 
 @Test
   public void searchCurrentMonth(){
-    app.search().searchCurrentMonth("Tel Aviv","4/29/2022","5/07 /2022");
+    app.search().searchCurrentMonth("Tel Aviv","4/25/2022","4/30/2022");
     app.search().submit();
   Assert.assertTrue(app.search().isListOfCarsAppeared());
 }
 @Test
   public void searchPeriodInPast(){
-  app.search().searchPeriodInPast("Tel aviv","2/01/2022","5/01/2022");
+  app.search().searchPeriodInPast("Tel aviv","2/01/2022","04/20/2022");
   app.search().submitWithoutWait();
 
   Assert.assertFalse (app.user().isYallaButtonNotActive());

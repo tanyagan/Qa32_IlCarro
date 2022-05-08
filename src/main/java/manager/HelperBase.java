@@ -31,7 +31,7 @@ public class HelperBase {
     }
 
     public boolean isElementPresent(By locator) {
-        return wd.findElements(locator).size() > 0;
+        return wd.findElements(locator).size()>0;
     }
 
     public void pause(int millis) {
@@ -55,4 +55,25 @@ public class HelperBase {
         // .until(ExpectedConditions.elementToBeClickable(wd.findElement(By.cssSelector("[type='submit']"))));
         click(By.cssSelector("[type='submit']"));
     }
-}
+//    public void takeScreenShot(String pathToFile){
+//        File tmp = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+//
+//        File screenshot = new File(pathToFile);
+//
+//        try {
+//            Files.copy(tmp,screenshot);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    public void takeScreenshot(String pathToFile){
+//        File tmp = ((TakesScreenshot) wd).getScreenshotAs(OutputType.FILE);
+//
+//        File screenshot = new File(pathToFile);
+//        try{
+//            Files.copy(tmp,screenshot);
+//        }catch(IOException e){
+//            e.printStackTrace();
+//        }
+
+    }

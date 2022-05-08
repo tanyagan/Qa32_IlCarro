@@ -1,5 +1,5 @@
 package tests;
-//import manager.MyDataProvider;
+import manager.MyDataProvider;
 import models.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;

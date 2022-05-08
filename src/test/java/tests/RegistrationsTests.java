@@ -34,7 +34,7 @@ public class RegistrationsTests extends  TestBase{
     public void registrationSuccessNewModel(){
         int index = (int)(System.currentTimeMillis()/1000)%3600;
         User user = new User()
-                .withEmail("Tali")
+                .withName("Tali")
                 .withLastName("Gan")
                 .withEmail("avgust_19"+index+"@gmail.com")
                 .withPassword("Avgust19$");
@@ -52,19 +52,21 @@ public class RegistrationsTests extends  TestBase{
     public void registrationWrongPasswordModel(){
 
        User user = new User()
-                .withEmail("Tali")
+                .withName("Tali")
                 .withLastName("Gan")
                 .withEmail("avgust_19@gmail.com")
-                .withPassword("Av5445");
+                .withPassword("ג5445");
         //logger.info("New user --> " +user.toString());
         app.user().openRegistrationForm();
         app.user().fillRegistrationForm(user);
         app.user().checkPolicy();
-        app.user().submit();
+        app.user().submitWithoutWait();
+        app.user().pause(2000);
+
 
         //error + button not active
         Assert.assertTrue(app.user().isErrorPasswordDisplayedSize());
-        Assert.assertTrue(app.user().isErrorPasswordDisplayedFormat());
+        //Assert.assertTrue(app.user().isErrorPasswordDisplayedFormat());
         Assert.assertFalse(app.user().isYallaButtonNotActive());
         Assert.assertTrue(app.user().isYallaButtonNotClickable());
     
